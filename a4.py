@@ -9,7 +9,8 @@ class TTTBoard:
         board - a list of '*'s, 'X's & 'O's. 'X's represent moves by player 'X', 'O's
             represent moves by player 'O' and '*'s are spots no one has yet played on
     """
-
+    def __init__(self, X, O, ) -> None:
+        self 
     pass
 
 
@@ -25,6 +26,9 @@ def play_tic_tac_toe() -> None:
         Returns:
             True if maybe_int is an int, False otherwise
         """
+        #if ValueError == int
+        #return False
+    
         try:
             int(maybe_int)
             return True

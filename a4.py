@@ -10,9 +10,42 @@ class TTTBoard:
             represent moves by player 'O' and '*'s are spots no one has yet played on
     """
     def __init__(self, X, O, ) -> None:
-        self 
-    pass
-
+        self.player = ['X']
+        self.player = ['O']
+        self.board = ['*'] * 9
+    
+    def __str__(self) -> str:
+        s = ''
+        for x in [0, 3, 6]:
+            s += self.board[x + 0] + "" + self.board[x + 1] + "" + self.board[x + 2]
+   
+    def make_move(self, player, pos) -> bool:
+        if pos < 0 or pos > 8 or self.board[pos] != '*':
+            return False
+        self.board[pos] = player
+        return True
+    def has_won(self, player) -> bool:
+        ps = [player] * 3
+        
+        #Horizantal
+        if self.board[:3] == ps or self.board[3:6] == ps or self.board[6:] == ps:
+            return True
+        
+        #Vertical
+        if self.board[::3] == ps or self.board[1::3] == ps or self.board[2::3] == ps:
+            return True
+        
+        #Diagonal
+        if self.board[::4] == ps or self.board[2:7:2] == ps:
+            return True
+   
+    def game_over(self) -> bool:
+        if self.has_won("X") or self.has_won("O") or "*" not in self.board:
+            return True
+        return False
+    
+    def clear(self) -> None:
+        self.board["*"] * 9
 
 def play_tic_tac_toe() -> None:
     """Uses your class to play TicTacToe"""
@@ -26,9 +59,11 @@ def play_tic_tac_toe() -> None:
         Returns:
             True if maybe_int is an int, False otherwise
         """
+    
+
         #if ValueError == int
         #return False
-    
+        
         try:
             int(maybe_int)
             return True
@@ -52,10 +87,13 @@ def play_tic_tac_toe() -> None:
             turn = not turn
 
     print(f"\nGame over!\n\n{brd}")
+    
     if brd.has_won(players[0]):
         print(f"{players[0]} wins!")
+    
     elif brd.has_won(players[1]):
         print(f"{players[1]} wins!")
+    
     else:
         print(f"Board full, cat's game!")
 
